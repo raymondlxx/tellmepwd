@@ -38,7 +38,7 @@ export class CategoriesPage {
 	}
 	itemSelected(category:Category){
 		console.log('itemSelected CategoriesPage');	
-		this.navCtrl.push("ListWebsitePage",{category:category});
+		this.navCtrl.push("WebsiteListPage",{category:category});
 	}
 
 
