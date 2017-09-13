@@ -2,10 +2,16 @@ import { Api } from './api/api';
 import { Items } from '../mocks/providers/items';
 import { Settings } from './settings/settings';
 import { User } from './user/user';
+import { Password } from './util/password';
+import { CategoryProvider } from './category/category';
+import { WebsiteProvider } from './website/website';
 
 export {
     Api,
     Items,
     Settings,
-    User
+    User,
+    Password,
+    CategoryProvider,
+    WebsiteProvider
 };

@@ -1,4 +1,3 @@
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -29,7 +28,7 @@ export class Password {
 			allLetters = this.ALL_LETTERS;
 		}
 
-		allLetters = allLetters.split("").sort(this.random_comp).join("");
+		allLetters = allLetters.split("").sort(this._random_comp).join("");
 		var result = "";
 		var l = allLetters.length-1;
 
@@ -41,7 +40,7 @@ export class Password {
 
 	}
 
-	random_comp(strA, strB) {
+	_random_comp(strA, strB) {
 	    return Math.random()>Math.random()?1:-1;
 	}
 
