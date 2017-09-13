@@ -31,5 +31,7 @@ namespace TellmePWD.Models
         }
 
         public System.Data.Entity.DbSet<TellmePWD.Models.Website> Websites { get; set; }
+
+        public System.Data.Entity.DbSet<TellmePWD.Models.Group> Groups { get; set; }
     }
 }

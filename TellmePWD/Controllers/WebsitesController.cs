@@ -13,7 +13,9 @@ using TellmePWD.Util;
 
 namespace TellmePWD.Controllers
 {
-    public class WebsitesController : ApiController
+    [Authorize]
+    [RoutePrefix("api/Websites")]
+    public class WebsitesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager userManager;
@@ -63,6 +65,51 @@ namespace TellmePWD.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!WebsiteExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [Route("UpdateWebsiteGroup")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult UpdateWebsiteGroup(UpdateWebsiteGroupRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Website found = db.Websites.Find(request.WebsiteID);
+            if(found == null)
+            {
+                return NotFound();
+            }
+
+            var group = db.Groups.Find(request.GroupID);
+            if(group == null)
+            {
+                return NotFound();
+            }
+
+            found.GroupID = request.GroupID;
+            this.SetSystemPropertyForPut(found);
+            db.Entry(found).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WebsiteExists(request.WebsiteID))
                 {
                     return NotFound();
                 }
