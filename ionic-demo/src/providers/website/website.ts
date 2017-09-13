@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Website,Category } from '../../models/data-model';
+import { Storage } from '@ionic/storage';
 /*
   Generated class for the WebsiteProvider provider.
 
@@ -11,20 +12,33 @@ import { Website,Category } from '../../models/data-model';
 @Injectable()
 export class WebsiteProvider {
 
-  constructor(public http: Http) {
+  constructor(public http: Http,
+    private storage: Storage) {
     console.log('Hello WebsiteProvider Provider');
   }
 
   query(category:Category){
 
-  	var currentWebsites :Website[] = new Array();
+    return this.storage.get("websites");
+  	
+  }
 
-	currentWebsites.push(new Website("1","google of "+category.name,"leo","leopassword123qwe"));
-	currentWebsites.push(new Website("2","baidu of "+category.name,"leo","johnpassqwe123"));
-	currentWebsites.push(new Website("3","163 of "+category.name,"leo","321654rfr5s"));
-	currentWebsites.push(new Website("4","sina of "+category.name,"leo","asdf"));
+  save(website:Website){
+    console.log(JSON.stringify(website));
 
-	return currentWebsites;
+    this.storage.get("websites").then(websites=>{
+        if(websites==null){
+            websites = new Array();
+        }
+
+
+        website.createTime = new Date().getTime();
+        website.updateTime = new Date().getTime();
+
+        websites.push(website);
+        this.storage.set("websites",websites);
+    });
+   
   }
 
 }

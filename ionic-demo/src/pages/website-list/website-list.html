@@ -8,8 +8,18 @@
 
   <ion-navbar>
     <ion-title> {{title}} </ion-title>
+        <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
+<ion-searchbar
+  [(ngModel)]="myInput"
+  [showCancelButton]="shouldShowCancel"
+  (ionInput)="onInput($event)"
+  (ionCancel)="onCancel($event)">
+</ion-searchbar>
 </ion-header>
 
 

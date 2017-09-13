@@ -18,6 +18,7 @@ import { WebsiteProvider } from '../../providers/providers';
 export class WebsiteListPage {
 
 	currentWebsites: Website[];
+
 	title:string;
 
   	constructor(
@@ -26,9 +27,19 @@ export class WebsiteListPage {
   		public websiteProvider:WebsiteProvider
   	) {
   		var category = navParams.get("category");
-  		this.title = category.name;
+      if(category!=null){
+        this.title = category.name;  
+      }else{
+        this.title = "Website List";
+      }
   		
-  		this.currentWebsites = this.websiteProvider.query(category);
+  		
+  		    this.websiteProvider.query(category).then(websites=>{
+            
+            this.currentWebsites = websites;
+        });
+         
+
   	}
 
   	ionViewDidLoad(item:Website) {
@@ -40,5 +51,18 @@ export class WebsiteListPage {
   		console.log("itemSelected WebsiteListPage:"+JSON.stringify(selectedItem));
   		this.navCtrl.push("WebsiteDetailPage",{item:selectedItem});
   	}
+
+    addItem(){
+      console.log("addItem clicked WebsiteListPage");
+      this.navCtrl.push("WebsiteCreatePage",null);
+    }
+
+
+    onInput(){
+
+    }
+    onCancel(){
+
+    }
 
 }

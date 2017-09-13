@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Camera } from '@ionic-native/camera';
+import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { Password, WebsiteProvider} from '../../providers/providers';
 
 /**
  * Generated class for the WebsiteCreatePage page.
@@ -14,12 +17,46 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'website-create.html',
 })
 export class WebsiteCreatePage {
+	isReadyToSave: boolean;
+  	form: FormGroup;
+  	constructor(
+  		public navCtrl: NavController, 
+    	public viewCtrl: ViewController, 
+    	formBuilder: FormBuilder, 
+    	public camera: Camera, 
+    	public passwordProvider: Password,
+    	public websiteProvider: WebsiteProvider) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  		this.form = formBuilder.group({
+	      	name: ['', Validators.required],
+	      	username: ['',Validators.required],
+	      	password: ['',Validators.required],
+	      	url: ['',Validators.required]
+    	});
+
+     // Watch the form for changes, and
+    this.form.valueChanges.subscribe((v) => {
+      this.isReadyToSave = this.form.valid;
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WebsiteCreatePage');
   }
 
+  createItem(){
+
+  }
+  cancel(){
+    this.viewCtrl.dismiss();
+  }
+  done(){
+  	 if (!this.form.valid) { return; }
+  	 var website = this.form.value;
+
+  	 this.websiteProvider.save(website);
+
+    this.viewCtrl.dismiss();
+
+  }
 }
