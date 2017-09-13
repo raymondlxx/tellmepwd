@@ -14,7 +14,11 @@ import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
+import { Password } from '../providers/providers';
 import { MyApp } from './app.component';
+import { UtilProvider } from '../providers/util/util';
+import { CategoryProvider } from '../providers/category/category';
+import { WebsiteProvider } from '../providers/website/website';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -62,13 +66,17 @@ export function provideSettings(storage: Storage) {
     Api,
     Items,
     User,
+    Password,
     Camera,
     GoogleMaps,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    UtilProvider,
+    CategoryProvider,
+    WebsiteProvider
   ]
 })
 export class AppModule { }
