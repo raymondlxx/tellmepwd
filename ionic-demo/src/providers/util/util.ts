@@ -15,4 +15,9 @@ export class UtilProvider {
     console.log('Hello UtilProvider Provider');
   }
 
+  formatDate(time:number){
+  	return new Date(time);
+
+  }
+
 }

@@ -4,12 +4,14 @@ export class Category {
 	public name:string;
 	public createTime:number;
 	public updateTime:number;
+	public itemCount:number;
 
-	constructor(id:string,name:string){
+	constructor(id:string,name:string,itemCount:number){
 		this.id = id;
 		this.name = name;
 		this.createTime = new Date().getTime();
 		this.updateTime = new Date().getTime();
+		this.itemCount = itemCount;
 	}
 
 }

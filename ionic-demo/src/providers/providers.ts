@@ -5,6 +5,7 @@ import { User } from './user/user';
 import { Password } from './util/password';
 import { CategoryProvider } from './category/category';
 import { WebsiteProvider } from './website/website';
+import { UtilProvider } from './util/util';
 
 export {
     Api,
@@ -13,5 +14,6 @@ export {
     User,
     Password,
     CategoryProvider,
-    WebsiteProvider
+    WebsiteProvider,
+    UtilProvider
 };

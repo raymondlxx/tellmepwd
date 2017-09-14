@@ -32,8 +32,9 @@
       </ion-item>
       <ion-item>
         <ion-label stacked>Password</ion-label>
-        <ion-input formControlName="password" type="text"></ion-input>
-        <ion-icon name="logo-codepen"></ion-icon>
+        <ion-input formControlName="password" type="{{passwordInputType}}" value="{{this.form.value.password}}"></ion-input>
+        <ion-icon name="ios-eye-outline" item-right (click)="showOrHidePwd()"></ion-icon>
+        <ion-icon name="logo-codepen" item-right (click)="generatePassword()"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-label stacked>Url</ion-label>

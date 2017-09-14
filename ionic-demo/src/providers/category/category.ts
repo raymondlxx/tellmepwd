@@ -19,10 +19,10 @@ export class CategoryProvider {
 
 	query(){
 		var categories :Category[] = new Array();
-		categories.push(new Category("1","All Items(11)"));
-		categories.push(new Category("2","Logins(10)"));
-		categories.push(new Category("3","Credit Card(1)"));
-		categories.push(new Category("4","Identity(0)"));
+		categories.push(new Category("1","All Items",100));
+		categories.push(new Category("2","Logins",23));
+		categories.push(new Category("3","Credit Card",17));
+		categories.push(new Category("4","Identity",60));
 		
 		return categories;
 	}

@@ -5,32 +5,37 @@ Ionic pages and navigation.
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>{{currentWebsite.name}}</ion-title>
+    <ion-title> {{currentWebsite.name}} </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="edit()">
+        Edit
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-list>
     <ion-item>
       <ion-label stacked>Name</ion-label>
-      <ion-input type="text">{{currentWebsite.name}}</ion-input>
+      <ion-input type="text" [readonly]="isReadonly()" value="{{currentWebsite.name}}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Username</ion-label>
-      <ion-input type="text">{{currentWebsite.username}}</ion-input>
+      <ion-input type="text" [readonly]="isReadonly()" value="{{currentWebsite.username}}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Password</ion-label>
-      <ion-input type="password">{{currentWebsite.password}}</ion-input>
+      <ion-input type="password" [readonly]="isReadonly()" value="{{currentWebsite.password}}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Url</ion-label>
-      <ion-input type="text">{{currentWebsite.url}}</ion-input>
+      <a href="{{currentWebsite.url}}" class="button button-outline button-positive">{{currentWebsite.url}}</a>
     </ion-item>
         <ion-item>
-      Created:{{currentWebsite.createTime}}
+      Created:{{utilProvider.formatDate(currentWebsite.createTime)|date:"yyyy/MM/dd"}}
     </ion-item>
         <ion-item>
-      Modified:{{currentWebsite.updateTime}}
+      Modified:{{utilProvider.formatDate(currentWebsite.updateTime)|date:"yyyy/MM/dd"}}
     </ion-item>
 
   </ion-list>

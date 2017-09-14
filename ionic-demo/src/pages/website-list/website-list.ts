@@ -19,50 +19,50 @@ export class WebsiteListPage {
 
 	currentWebsites: Website[];
 
-	title:string;
+	title: string;
 
-  	constructor(
-  		public navCtrl: NavController, 
-  		public navParams: NavParams,
-  		public websiteProvider:WebsiteProvider
-  	) {
-  		var category = navParams.get("category");
-      if(category!=null){
-        this.title = category.name;  
-      }else{
-        this.title = "Website List";
-      }
-  		
-  		
-  		    this.websiteProvider.query(category).then(websites=>{
-            
-            this.currentWebsites = websites;
-        });
-         
-
-  	}
-
-  	ionViewDidLoad(item:Website) {
-    	console.log('ionViewDidLoad WebsiteListPage');
-    	
-  	}
-
-  	itemSelected(selectedItem:Website){
-  		console.log("itemSelected WebsiteListPage:"+JSON.stringify(selectedItem));
-  		this.navCtrl.push("WebsiteDetailPage",{item:selectedItem});
-  	}
-
-    addItem(){
-      console.log("addItem clicked WebsiteListPage");
-      this.navCtrl.push("WebsiteCreatePage",null);
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public websiteProvider: WebsiteProvider
+  ) {
+    var category = navParams.get("category");
+    if (category != null) {
+      this.title = category.name;
+    } else {
+      this.title = "Website List";
     }
 
 
-    onInput(){
+    this.websiteProvider.query(category).then(websites => {
 
-    }
-    onCancel(){
+      this.currentWebsites = websites;
+    });
 
-    }
+
+  }
+
+  ionViewDidLoad(item: Website) {
+    console.log('ionViewDidLoad WebsiteListPage');
+
+  }
+
+  itemSelected(selectedItem: Website) {
+    console.log("itemSelected WebsiteListPage:" + JSON.stringify(selectedItem));
+    this.navCtrl.push("WebsiteDetailPage", { item: selectedItem });
+  }
+
+  addItem() {
+    console.log("addItem clicked WebsiteListPage");
+    this.navCtrl.push("WebsiteCreatePage", null);
+  }
+
+
+  onInput() {
+
+  }
+  onCancel() {
+
+  }
 
 }
